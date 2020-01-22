@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState, useContext } from 'react'
 import { FetchUrl } from '../Constants/fetchUrl'
+import {API_KEY} from 'react-native-dotenv'
 
 type DataConsumer = {
     restaurants: any
@@ -17,13 +18,14 @@ export const DataProvider = ({...props}) => {
     fetch(FetchUrl, {
     method: 'GET',
     headers: {
-        'Authorization': 'Bearer oSJvaTmFtYVCEJcMsLFA4uRljDOILtEfp0sTWflSWclozapMP1rCZ6uttKPOoYnrdUGcTXI0ztOf3rTPVSBRa1JjngqcoTKD30YUp7yKxhZCNzS4bsZV_DqzzkAwXXYx',
+        'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json'
     }
 })
     .then((response) => response.json())
     .then((data) => {
-        console.log('Success:', data);
+        console.info('Success:');
+        setRestaurants(data)
     })
     .catch((error) => {
         console.error('Error:', error);

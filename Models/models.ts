@@ -2,6 +2,7 @@ export type Dish = 'sushi' | 'burger' | 'pizza'
 
 export type DataConsumer = {
     restaurants: any
+    criterium: Dish
     updateCriterium: (value: Dish) => void
 }
 

@@ -5,19 +5,25 @@ import { Dish } from '../Models/models'
 import { useData } from '../Contexts/fetch.context';
 
 interface Style {
-    buttonContainer: ViewStyle;
-    circle: ViewStyle;
-    checkedCircle: ViewStyle;
-    label: TextStyle;
+    container: ViewStyle
+    buttonContainer: ViewStyle
+    circle: ViewStyle
+    checkedCircle: ViewStyle
+    label: TextStyle
 }
 
 const styles = StyleSheet.create<Style>(
     {
+        container: {
+            flexDirection: 'row'
+        },
         buttonContainer: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
             alignItems: 'center',
-            marginBottom: 30,
+            marginBottom: 10,
+            marginTop: 10,
+            flex: 1,
         },
         circle: {
             height: 20,
@@ -27,12 +33,15 @@ const styles = StyleSheet.create<Style>(
             borderColor: '#ACACAC',
             alignItems: 'center',
             justifyContent: 'center',
+            marginLeft:10 
         },
         checkedCircle: {
             width: 14,
             height: 14,
             borderRadius: 7,
             backgroundColor: '#794F9B',
+            position: 'relative',
+            left: -17
         },
         label: {
             textTransform: 'capitalize'
@@ -41,17 +50,18 @@ const styles = StyleSheet.create<Style>(
 );
 
 const CriteriumSelector: FunctionComponent = () => {
-    const { updateCriterium } = useData()
-    return <Fragment>
-        {FilterCriteria.map((criterium: Dish) => {
+    const { criterium, updateCriterium } = useData()
+    return <View style={styles.container}>
+        {FilterCriteria.map((item: Dish) => {
             return (
-                <View key={criterium} style={styles.buttonContainer}>
-                    <Text style={styles.label}>{criterium}</Text>
-                    <TouchableOpacity onPress={() => updateCriterium(criterium)} style={styles.circle}/>
+                <View key={item} style={styles.buttonContainer}>
+                    <Text style={styles.label}>{item}</Text>
+                    <TouchableOpacity onPress={() => updateCriterium(item)} style={styles.circle} />
+                    {criterium === item && (<View style={styles.checkedCircle}/>) }
                 </View>
             )
         })}
-    </Fragment>
+    </View>
 }
 
 

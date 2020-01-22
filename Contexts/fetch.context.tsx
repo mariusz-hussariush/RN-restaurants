@@ -34,7 +34,7 @@ export const DataProvider = ({ ...props }) => {
 
     const updateCriterium = (value: Dish) => setCriterium(value)
 
-    return <DataContext.Provider value={{ restaurants, updateCriterium }} {...props} />
+    return <DataContext.Provider value={{ restaurants, updateCriterium, criterium }} {...props} />
 }
 
 export const useData = () => {

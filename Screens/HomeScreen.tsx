@@ -7,7 +7,7 @@ import CriteriumSelector from '../Components/CriteriumSelectorComponent'
 
 const HomeScreen: FunctionComponent = () => {
     return (
-    <View>
+    <View style={{height: '100%', paddingBottom:20}}>
         <DataProvider>
             <CriteriumSelector/>
             <HomeComponent/>

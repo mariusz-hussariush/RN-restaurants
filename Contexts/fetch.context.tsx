@@ -1,10 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from 'react'
 import { FetchUrl } from '../Constants/fetchUrl'
 import {API_KEY} from 'react-native-dotenv'
-
-type DataConsumer = {
-    restaurants: any
-}
+import { Cuisine, DataConsumer } from '../Models/models'
 
 const DataContext = createContext<DataConsumer>(undefined)
 
@@ -14,8 +11,12 @@ type Props = {
 
 export const DataProvider = ({...props}) => {
     const [restaurants, setRestaurants] = useState<any>(undefined)
+    const [cuisine, setCuisine] = useState<Cuisine>('sushi')
+    
     useEffect(() => {
-    fetch(FetchUrl, {
+        // console.log(`${FetchUrl}${cuisine}${FetchUrlLocation}`);
+        
+    fetch(FetchUrl(cuisine), {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${API_KEY}`,
@@ -24,7 +25,7 @@ export const DataProvider = ({...props}) => {
 })
     .then((response) => response.json())
     .then((data) => {
-        console.info('Success:');
+        console.info('Success:', data.businesses.length);
         setRestaurants(data)
     })
     .catch((error) => {
@@ -33,8 +34,9 @@ export const DataProvider = ({...props}) => {
         
     }, [])
 
+    const updateCuisine = (value: Cuisine) => setCuisine(value)
 
-    return <DataContext.Provider value={{restaurants}} {...props}/>
+    return <DataContext.Provider value={{restaurants, updateCuisine}} {...props}/>
 }
 
 export const useData = () => {
@@ -44,6 +46,3 @@ export const useData = () => {
     }
     return context;
 }
-
-// const data = { username: 'example' };
-

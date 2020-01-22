@@ -8,5 +8,8 @@ export type DataConsumer = {
 export interface Restaurant {
     name: string,
     location: { [key: string]: string },
-    image_url: string
+    image_url: string,
+    price: number,
+    rating: number,
+    phone: string 
 }

@@ -4,14 +4,12 @@ import { View, Text, TouchableOpacity, ViewStyle, TextStyle, StyleSheet } from '
 import { Dish } from '../Models/models'
 import { useData } from '../Contexts/fetch.context';
 
-
 interface Style {
     buttonContainer: ViewStyle;
     circle: ViewStyle;
     checkedCircle: ViewStyle;
     label: TextStyle;
 }
-
 
 const styles = StyleSheet.create<Style>(
     {

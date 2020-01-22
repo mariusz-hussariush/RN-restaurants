@@ -14,8 +14,6 @@ export const DataProvider = ({ ...props }) => {
     const [criterium, setCriterium] = useState<Dish>(FilterCriteria[0])
 
     useEffect(() => {
-        console.log(FilterCriteria);
-        
         fetch(FetchUrl(criterium), {
             method: 'GET',
             headers: {

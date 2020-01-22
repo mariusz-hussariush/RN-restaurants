@@ -32,7 +32,7 @@ export const DataProvider = ({...props}) => {
         console.error('Error:', error);
     });
         
-    }, [])
+    }, [cuisine])
 
     const updateCuisine = (value: Cuisine) => setCuisine(value)
 

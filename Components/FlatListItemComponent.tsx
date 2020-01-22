@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { View, Text, Image } from 'react-native'
-import { Restaurant } from '../Models/models';
+import { Restaurant } from '../Models/models'
 
 type Props = { 
     restaurant: Restaurant

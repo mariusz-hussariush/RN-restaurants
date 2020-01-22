@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { FetchUrl } from './Constants/fetchUrl';
+import { FetchUrl } from './Constants/constants';
 import HomeScreen from './Screens/HomeScreen';
 
 export default function App() {

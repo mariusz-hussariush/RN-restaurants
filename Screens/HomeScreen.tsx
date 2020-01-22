@@ -3,14 +3,15 @@ import { View, Text } from 'react-native'
 // import HomeComponent from '../../Components/Home/HomeComponent'
 import HomeComponent from '../Components/HomeComponent'
 import {DataProvider} from '../Contexts/fetch.context'
+import CriteriumSelector from '../Components/CriteriumSelectorComponent'
 
 const HomeScreen: FunctionComponent = () => {
     return (
     <View>
         <DataProvider>
+            <CriteriumSelector/>
             <HomeComponent/>
         </DataProvider>
-        {/* <Text>home test screen</Text> */}
     </View>
     )
 }

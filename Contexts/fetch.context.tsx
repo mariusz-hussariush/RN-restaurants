@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from 'react'
-import { FetchUrl } from '../Constants/fetchUrl'
-import {API_KEY} from 'react-native-dotenv'
-import { Cuisine, DataConsumer } from '../Models/models'
+import { FetchUrl, FilterCriteria } from '../Constants/constants'
+import { API_KEY } from 'react-native-dotenv'
+import { Dish, DataConsumer } from '../Models/models'
 
 const DataContext = createContext<DataConsumer>(undefined)
 
@@ -9,39 +9,39 @@ type Props = {
     children?: React.ReactNode
 }
 
-export const DataProvider = ({...props}) => {
+export const DataProvider = ({ ...props }) => {
     const [restaurants, setRestaurants] = useState<any>(undefined)
-    const [cuisine, setCuisine] = useState<Cuisine>('sushi')
-    
+    const [criterium, setCriterium] = useState<Dish>(FilterCriteria[0])
+
     useEffect(() => {
-        // console.log(`${FetchUrl}${cuisine}${FetchUrlLocation}`);
+        console.log(FilterCriteria);
         
-    fetch(FetchUrl(cuisine), {
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-    }
-})
-    .then((response) => response.json())
-    .then((data) => {
-        console.info('Success:', data.businesses.length);
-        setRestaurants(data)
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-        
-    }, [cuisine])
+        fetch(FetchUrl(criterium), {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.info('Success:');
+                setRestaurants(data)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
-    const updateCuisine = (value: Cuisine) => setCuisine(value)
+    }, [criterium])
 
-    return <DataContext.Provider value={{restaurants, updateCuisine}} {...props}/>
+    const updateCriterium = (value: Dish) => setCriterium(value)
+
+    return <DataContext.Provider value={{ restaurants, updateCriterium }} {...props} />
 }
 
 export const useData = () => {
     const context = useContext(DataContext);
-    if(context === undefined) {
+    if (context === undefined) {
         throw new Error('use within DataProvider');
     }
     return context;

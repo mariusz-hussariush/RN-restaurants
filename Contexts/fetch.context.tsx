@@ -24,7 +24,8 @@ export const DataProvider = ({...props}) => {
 })
     .then((response) => response.json())
     .then((data) => {
-        console.log('Success:', data);
+        console.info('Success:');
+        setRestaurants(data)
     })
     .catch((error) => {
         console.error('Error:', error);

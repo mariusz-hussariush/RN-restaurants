@@ -1,14 +1,14 @@
-import React, { FunctionComponent, Fragment } from 'react'
+import React, { FunctionComponent } from 'react'
 import { FilterCriteria } from '../Constants/constants'
-import { View, Text, TouchableOpacity, ViewStyle, TextStyle, StyleSheet } from 'react-native'
+import { View, Text, ViewStyle, TextStyle, StyleSheet } from 'react-native'
 import { Dish } from '../Models/models'
-import { useData } from '../Contexts/fetch.context';
+import { useData } from '../Contexts/data.context';
+import { Radio } from 'native-base';
 
 interface Style {
     container: ViewStyle
     buttonContainer: ViewStyle
     circle: ViewStyle
-    checkedCircle: ViewStyle
     label: TextStyle
 }
 
@@ -26,22 +26,7 @@ const styles = StyleSheet.create<Style>(
             flex: 1,
         },
         circle: {
-            height: 20,
-            width: 20,
-            borderRadius: 10,
-            borderWidth: 1,
-            borderColor: '#ACACAC',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft:10 
-        },
-        checkedCircle: {
-            width: 14,
-            height: 14,
-            borderRadius: 7,
-            backgroundColor: '#794F9B',
-            position: 'relative',
-            left: -17
+            marginLeft: 10
         },
         label: {
             textTransform: 'capitalize'
@@ -56,13 +41,11 @@ const CriteriumSelector: FunctionComponent = () => {
             return (
                 <View key={item} style={styles.buttonContainer}>
                     <Text style={styles.label}>{item}</Text>
-                    <TouchableOpacity onPress={() => updateCriterium(item)} style={styles.circle} />
-                    {criterium === item && (<View style={styles.checkedCircle}/>) }
+                    <Radio onPress={() => updateCriterium(item)} style={styles.circle} selected={criterium === item} />
                 </View>
             )
         })}
     </View>
 }
-
 
 export default CriteriumSelector

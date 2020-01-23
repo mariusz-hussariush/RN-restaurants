@@ -14,3 +14,8 @@ export interface Restaurant {
     rating: number,
     phone: string 
 }
+
+export type Location = {
+    lat: number,
+    lng: number
+}

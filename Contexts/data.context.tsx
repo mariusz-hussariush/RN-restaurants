@@ -1,20 +1,16 @@
 import React, { createContext, useEffect, useState, useContext } from 'react'
-import { FetchUrl, FilterCriteria } from '../Constants/constants'
+import { FetchUrl, FilterCriteria, defaultLocation } from '../Constants/constants'
 import { API_KEY } from 'react-native-dotenv'
 import { Dish, DataConsumer } from '../Models/models'
 
 const DataContext = createContext<DataConsumer>(undefined)
-
-type Props = {
-    children?: React.ReactNode
-}
 
 export const DataProvider = ({ ...props }) => {
     const [restaurants, setRestaurants] = useState<any>(undefined)
     const [criterium, setCriterium] = useState<Dish>(FilterCriteria[0])
 
     useEffect(() => {
-        fetch(FetchUrl(criterium), {
+        fetch(FetchUrl(criterium, defaultLocation), {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${API_KEY}`,
@@ -23,16 +19,15 @@ export const DataProvider = ({ ...props }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.info('Success:');
+                console.info('Success');
                 setRestaurants(data)
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-
     }, [criterium])
 
-    const updateCriterium = (value: Dish) => { setRestaurants(undefined); setCriterium(value)}
+    const updateCriterium = (value: Dish) => { setRestaurants(undefined); setCriterium(value) }
 
     return <DataContext.Provider value={{ restaurants, updateCriterium, criterium }} {...props} />
 }

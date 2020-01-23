@@ -63,9 +63,10 @@ const FlatListItemComponent: FunctionComponent<Props> = ({ restaurant }) => {
                     <Text style={{ flex: 1 }}>Price: {price}</Text>
                     <Text style={{ flex: 1 }}>Rating: {rating}</Text>
                 </View>
-                {phone ? (<TouchableOpacity onPress={() => Linking.openURL(`tel:${phone}`)}>
-                    <Text style={styles.phoneLink}>{phone}</Text>
-                </TouchableOpacity>) :
+                {phone ?
+                    (<TouchableOpacity onPress={() => Linking.openURL(`tel:${phone}`)}>
+                        <Text style={styles.phoneLink}>{phone}</Text>
+                    </TouchableOpacity>) :
                     <Text>Sorry, no phone number</Text>}
                 <Text>{location?.address1}, {location?.city}</Text>
             </View>

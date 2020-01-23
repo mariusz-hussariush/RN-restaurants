@@ -2,7 +2,7 @@ import React, { FunctionComponent, Fragment } from 'react'
 import { FilterCriteria } from '../Constants/constants'
 import { View, Text, TouchableOpacity, ViewStyle, TextStyle, StyleSheet } from 'react-native'
 import { Dish } from '../Models/models'
-import { useData } from '../Contexts/fetch.context';
+import { useData } from '../Contexts/data.context';
 
 interface Style {
     container: ViewStyle
@@ -33,7 +33,7 @@ const styles = StyleSheet.create<Style>(
             borderColor: '#ACACAC',
             alignItems: 'center',
             justifyContent: 'center',
-            marginLeft:10 
+            marginLeft: 10
         },
         checkedCircle: {
             width: 14,
@@ -57,12 +57,11 @@ const CriteriumSelector: FunctionComponent = () => {
                 <View key={item} style={styles.buttonContainer}>
                     <Text style={styles.label}>{item}</Text>
                     <TouchableOpacity onPress={() => updateCriterium(item)} style={styles.circle} />
-                    {criterium === item && (<View style={styles.checkedCircle}/>) }
+                    {criterium === item && (<View style={styles.checkedCircle} />)}
                 </View>
             )
         })}
     </View>
 }
-
 
 export default CriteriumSelector

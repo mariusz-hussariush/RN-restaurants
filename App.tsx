@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import HomeScreen from './Screens/HomeScreen';
+
+interface Styles {
+  container: ViewStyle
+}
 
 export default function App() {
   
@@ -11,7 +15,7 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create<any>({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     justifyContent: 'flex-start',

@@ -3,6 +3,7 @@
 ## Expo QR Code
 
 https://expo.io/@aethel/rnrestaurants
+
 Bear in mind you will need an Expo client installed on your mobile.
 
 ## Install
